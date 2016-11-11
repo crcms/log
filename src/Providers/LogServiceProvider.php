@@ -55,8 +55,6 @@ class LogServiceProvider extends ServiceProvider
     {
         //合并 config
         $this->mergeConfigFrom($this->configPath, 'log');
-
-        $this->app->register(EventServiceProvider::class);
     }
 
 

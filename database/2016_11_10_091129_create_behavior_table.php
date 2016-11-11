@@ -20,10 +20,12 @@ class CreateBehaviorTable extends Migration
             $table->text('model');
             $table->string('url');
             $table->string('method',15);
-            $table->string('agent',50);
+            $table->string('agent',255);
+            $table->string('remark',255);
             $table->unsignedInteger('user_id')->default(0);
             $table->string('user_type',40);
-
+            $table->string('type',40);
+            $table->unsignedInteger('type_id')->default(0);
             $table->timestamps();
         });
     }

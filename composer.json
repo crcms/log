@@ -17,6 +17,7 @@
     },
 	"autoload": {
         "files": [
+            "src/helper.php"
         ],
         "psr-4": {
             "CrCms\\Log\\": "src/"

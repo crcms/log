@@ -29,5 +29,8 @@ class Behavior extends Model
      */
     protected $dates = ['deleted_at'];
 
-
+    /**
+     * @var string
+     */
+    protected $table = 'behavior_logs';
 }

@@ -13,7 +13,7 @@ class CreateBehaviorTable extends Migration
      */
     public function up()
     {
-        Schema::create('behaviors', function (Blueprint $table) {
+        Schema::create('behavior_logs', function (Blueprint $table) {
             $table->increments('id');
 
             $table->unsignedBigInteger('client_ip')->default(0);
@@ -37,6 +37,6 @@ class CreateBehaviorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('behaviors');
+        Schema::dropIfExists('behavior_logs');
     }
 }

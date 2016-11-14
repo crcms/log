@@ -35,7 +35,7 @@ class BehaviorObserver
      */
     public function saved(Model $model)
     {
-        $this->repository->create($model);
+        $this->repository->create($model,BehaviorRepository::LOG_TYPE_INFO);
     }
 
 }

@@ -32,6 +32,35 @@ class BehaviorRepository
      */
     protected $model = null;
 
+    /**
+     *
+     */
+    const LOG_TYPE_DEBUG = 'debug';
+
+    /**
+     *
+     */
+    const LOG_TYPE_INFO = 'info';
+
+    /**
+     *
+     */
+    const LOG_TYPE_WARNING = 'warning';
+
+    /**
+     *
+     */
+    const LOG_TYPE_DANGER = 'danger';
+
+    /**
+     *
+     */
+    const LOG_TYPE_ERROR = 'error';
+
+    /**
+     *
+     */
+    const LOG_TYPE = [self::LOG_TYPE_DEBUG,self::LOG_TYPE_INFO,self::LOG_TYPE_WARNING,self::LOG_TYPE_DANGER,self::LOG_TYPE_ERROR];
 
     /**
      * BehaviorRepository constructor.
@@ -53,10 +82,20 @@ class BehaviorRepository
      * @param string $remark
      * @return Behavior|null
      */
-    public function create(Model $model,string $remark = '')
+    public function create(Model $model,string $logType = self::LOG_TYPE_INFO,string $remark = '')
     {
+        //匹配记录等级
+        $allowLevelKey = array_search(config('log.log_level'),static::LOG_TYPE);
+        $currentLevel = array_search($logType,static::LOG_TYPE);
+        if ($currentLevel < $allowLevelKey)
+        {
+            return null;
+        }
+
+        //get User
         $user = $this->getUser();
 
+        //save
         $this->model->client_ip = sprintf("%u",ip2long($this->request->ip()));
         $this->model->model = serialize($model);
         $this->model->url = $this->request->fullUrl();
@@ -67,6 +106,7 @@ class BehaviorRepository
         $this->model->type = get_class($model);
         $this->model->type_id = $model->{$model->getKeyName()} ?? 0;
         $this->model->remark = $remark;
+        $this->model->log_type = $logType;
         $this->model->save();
 
         return $this->model;

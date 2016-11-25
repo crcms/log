@@ -82,7 +82,7 @@ class BehaviorRepository
      * @param string $remark
      * @return Behavior|null
      */
-    public function create(Model $model,string $logType = self::LOG_TYPE_INFO,string $remark = '')
+    public function create(string $remark = '',$model = null,string $logType = self::LOG_TYPE_INFO)
     {
         //匹配记录等级
         $allowLevelKey = array_search(config('log.log_level'),static::LOG_TYPE);
@@ -97,16 +97,27 @@ class BehaviorRepository
 
         //save
         $this->model->client_ip = sprintf("%u",ip2long($this->request->ip()));
-        $this->model->model = serialize($model);
         $this->model->url = $this->request->fullUrl();
         $this->model->method = $this->request->method();
         $this->model->agent = $this->agent->getUserAgent();
         $this->model->user_id = $user ? $user->id : 0;
         $this->model->user_type = $user ? get_class($user) : '';
-        $this->model->type = get_class($model);
-        $this->model->type_id = $model->{$model->getKeyName()} ?? 0;
         $this->model->remark = $remark;
         $this->model->log_type = $logType;
+
+        if ($model instanceof Model)
+        {
+            $this->model->model = serialize($model);
+            $this->model->type = get_class($model);
+            $this->model->type_id = $model->{$model->getKeyName()};
+        }
+        else
+        {
+            $this->model->model = (string)$model;
+            $this->model->type = (string)$model;
+            $this->model->type_id = 0;
+        }
+
         $this->model->save();
 
         return $this->model;

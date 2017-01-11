@@ -23,5 +23,10 @@
         "psr-4": {
             "CrCms\\Log\\": "src/"
         }
+    },
+    "extra": {
+      "branch-alias": {
+        "dev-master": "1.1-dev"
+      }
     }
 }

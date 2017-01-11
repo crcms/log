@@ -1,32 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: simon
- * Date: 2016/11/11
- * Time: 10:42
- */
-
 namespace CrCms\Log\Observers;
 
-
-use CrCms\Log\Repositories\BehaviorRepository;
+use CrCms\Log\Services\BehaviorLogService;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class BehaviorObserver
+ * @package CrCms\Log\Observers
+ */
 class BehaviorObserver
 {
 
     /**
-     * @var BehaviorRepository|null
+     * @var BehaviorLogService|null
      */
-    protected $repository = null;
+    protected $service = null;
+
 
     /**
      * BehaviorObserver constructor.
-     * @param BehaviorRepository $repository
+     * @param BehaviorLogService $service
      */
-    public function __construct(BehaviorRepository $repository)
+    public function __construct(BehaviorLogService $service)
     {
-        $this->repository = $repository;
+        $this->service = $service;
     }
 
 
@@ -35,7 +32,11 @@ class BehaviorObserver
      */
     public function saved(Model $model)
     {
-        $this->repository->create('',$model,BehaviorRepository::LOG_TYPE_INFO);
+        $this->service->setLogType(config('log.log_levels.info'))
+                    ->setLogModel($model)
+                    ->setLogRemark('system observer listen')
+                    ->setLogStatus(config('log.log_status.system'))
+                    ->save();
     }
 
 }

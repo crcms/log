@@ -7,8 +7,35 @@ return [
         ]
     ],
 
-    'user_session_key'=>[],
+    'log_levels'=>[
+        'debug',
+        'info',
+        'notice',
+        'warning',
+        'error',
+        'critical',
+        'alert',
+        'emergency',
+    ],
 
-    //'debug','info','warning','danger','error'
-    'log_level'=>'info',
+    'default_level'=>'info',
+
+
+    'log_status'=>[
+        'success'=>'success',
+        'error'=>'error',
+        'fail'=>'fail',
+        'test'=>'test',
+        'system'=>'system',
+    ],
+
+
+    'default_status'=>'success',
+
+    'user_api'=>[
+        'class'=>'',//Examples : App\Services\Test::class
+        'method'=>'getUser',
+        'key'=>'id'
+    ],
+
 ];

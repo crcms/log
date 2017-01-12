@@ -17,14 +17,14 @@ class CreateBehaviorTable extends Migration
             $table->increments('id');
 
             $table->unsignedBigInteger('client_ip')->default(0);
-            $table->text('model');
-            $table->string('url');
-            $table->string('method',15);
-            $table->string('agent',255);
-            $table->string('remark',255);
+            $table->text('model')->default('');
+            $table->string('url')->default('');
+            $table->string('method',15)->default('');
+            $table->string('agent',255)->default('');
+            $table->string('remark',255)->default('');
             $table->unsignedInteger('user_id')->default(0);
-            $table->string('user_type',40);
-            $table->string('type',40);
+            $table->string('user_type',50)->default('');
+            $table->string('type',50)->default('');
             $table->unsignedInteger('type_id')->default(0);
             $table->timestamps();
         });

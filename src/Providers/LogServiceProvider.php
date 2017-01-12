@@ -10,6 +10,7 @@ namespace CrCms\Log\Providers;
 
 
 use CrCms\Log\Observers\BehaviorObserver;
+use CrCms\Repository\RepositoryServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class LogServiceProvider extends ServiceProvider
@@ -53,6 +54,9 @@ class LogServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        //register serviceProviders
+        $this->app->register(RepositoryServiceProvider::class);
+
         //合并 config
         $this->mergeConfigFrom($this->configPath, 'log');
     }

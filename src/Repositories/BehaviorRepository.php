@@ -15,7 +15,7 @@ class BehaviorRepository extends AbstractRepository
     /**
      * @return Model
      */
-    protected function model(): Model
+    public function newModel(): Model
     {
         return app(Behavior::class);
     }

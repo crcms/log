@@ -32,6 +32,9 @@ return [
 
     'default_status'=>'success',
 
+
+    'log_module'=>[],
+
     'user_api'=>[
         'class'=>'',//Examples : App\Services\Test::class
         'method'=>'getUser',

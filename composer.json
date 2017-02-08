@@ -13,8 +13,7 @@
     ],
     "require": {
         "php":">=7.0",
-        "jenssegers/agent": "^2.3",
-        "crcms/repository":"0.0.*"
+        "jenssegers/agent": "^2.3"
     },
 	"autoload": {
         "files": [

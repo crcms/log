@@ -222,8 +222,13 @@ class BehaviorLogService
         $user = null;
 
         $api = config('log.user_api');
-        if ($api) {
+        if (!empty($api['class']) && !empty($api['method'])) {
             $user = call_user_func([app($api['class']),$api['method']]);
+        }
+
+        //cove object
+        if (is_array($user)) {
+            $user = json_decode(json_encode($user));
         }
 
         return $user;

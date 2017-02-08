@@ -1,26 +1,28 @@
 <?php
 return [
 
+    //自动监听的日志模型
     'log_model'=>[
         \CrCms\Log\Observers\BehaviorObserver::class=>[
             //Namespace\Model
         ]
     ],
 
+    //日志等级
     'log_levels'=>[
-        'debug'=>'debug',
-        'info'=>'info',
-        'notice'=>'notice',
-        'warning'=>'warning',
-        'error'=>'error',
-        'critical'=>'critical',
-        'alert'=>'alert',
-        'emergency'=>'emergency',
+        'debug',
+        'info',
+        'notice',
+        'warning',
+        'error',
+        'critical',
+        'alert',
+        'emergency',
     ],
 
-    'default_level'=>'info',
+    'default_level'=>'info',//默认日志等级
 
-
+    //日志状态
     'log_status'=>[
         'success'=>'success',
         'error'=>'error',
@@ -29,11 +31,13 @@ return [
         'system'=>'system',
     ],
 
+    'default_status'=>'success',//默认日志状态
 
-    'default_status'=>'success',
 
-    'user_api'=>[
-        'class'=>\App\Test::class,
+    'log_module'=>[],//日志模块
+
+    'user_api'=>[//user api中获取user的id
+        'class'=>'',//Examples : App\Services\Test::class
         'method'=>'getUser',
         'key'=>'id'
     ],

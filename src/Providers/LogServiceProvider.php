@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: simon
- * Date: 2016/11/10
- * Time: 16:53
- */
-
 namespace CrCms\Log\Providers;
-
 
 use CrCms\Log\Observers\BehaviorObserver;
 use CrCms\Repository\RepositoryServiceProvider;
@@ -55,7 +47,7 @@ class LogServiceProvider extends ServiceProvider
     public function register()
     {
         //register serviceProviders
-        $this->app->register(RepositoryServiceProvider::class);
+        //$this->app->register(RepositoryServiceProvider::class);
 
         //合并 config
         $this->mergeConfigFrom($this->configPath, 'log');

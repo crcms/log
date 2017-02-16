@@ -1,6 +1,7 @@
 <?php
 namespace CrCms\Log\Services;
 
+use CrCms\Log\Models\Behavior;
 use CrCms\Log\Repositories\BehaviorRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class BehaviorLogService
     /**
      * @var BehaviorRepository|null
      */
-    protected $repository = null;
+//    protected $repository = null;
+
+    protected $model = null;
 
     /**
      * @var array
@@ -58,13 +61,12 @@ class BehaviorLogService
      * BehaviorLogService constructor.
      * @param Request $request
      * @param Agent $agent
-     * @param BehaviorRepository $repository
      */
-    public function __construct(Request $request, Agent $agent, BehaviorRepository $repository)
+    public function __construct(Request $request, Agent $agent, Behavior $model)
     {
         $this->request = $request;
         $this->agent = $agent;
-        $this->repository = $repository;
+        $this->model = $model;
     }
 
 
@@ -125,7 +127,7 @@ class BehaviorLogService
             ->setTypeData()
             ->setStatusData();
 
-        return $this->repository->create($this->data);
+        return $this->model->create($this->data);
     }
 
 
@@ -197,7 +199,8 @@ class BehaviorLogService
      */
     protected function setRequestData() : self
     {
-        $this->data['client_ip'] = sprintf("%u",ip2long($this->request->ip()));
+        $ip = $this->request->ip()==='::1' ? '127.0.0.1' : $this->request->ip();
+        $this->data['client_ip'] = sprintf("%u",ip2long($ip));
         $this->data['url'] = $this->request->fullUrl();
         $this->data['method'] = $this->request->method();
         return $this;

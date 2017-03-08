@@ -160,7 +160,7 @@ class BehaviorLogService
         if ($this->logModel instanceof Model) {
             $this->data['model'] = serialize($this->logModel);
             $this->data['type'] = get_class($this->logModel);
-            $this->data['type_id'] = $this->logModel->{$this->logModel->getKeyName()};
+            $this->data['type_id'] = $this->logModel->{$this->logModel->getKeyName()} ?? 0;
         } else {
             $this->data['model'] = (string)$this->logModel;
             $this->data['type'] = (string)$this->logModel;

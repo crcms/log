@@ -24,7 +24,7 @@ class BehaviorLogJob implements ShouldQueue
     /**
      * @var int
      */
-    public $timeout = 10;
+    public $timeout = 5;
 
     /**
      * @var array

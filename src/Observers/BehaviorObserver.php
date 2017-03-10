@@ -32,7 +32,7 @@ class BehaviorObserver
      */
     public function saved(Model $model)
     {
-        $this->service->setLogType(config('log.log_levels.info'))
+        $this->service->setLogType('info')
                     ->setLogModel($model)
                     ->setLogRemark('system observer listen')
                     ->setLogStatus(config('log.log_status.system'))

@@ -60,12 +60,11 @@ class LogServiceProvider extends ServiceProvider
     protected function listenModel()
     {
         $observers = $this->app['config']['log']['log_model'];
-        foreach ($observers as $observer)
-        {
-            foreach ($observer as $model)
-            {
-                $model::observe(BehaviorObserver::class);
-            }
-        }
+
+        array_walk($observers,function($models,$observer){
+            array_map(function($model) use ($observer){
+                $model::observe($observer);
+            },$models);
+        });
     }
 }

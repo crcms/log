@@ -33,7 +33,6 @@ return [
 
     'default_status'=>'success',//默认日志状态
 
-
     'log_module'=>[],//日志模块
 
     'user_api'=>[//user api中获取user的id
@@ -42,4 +41,6 @@ return [
         'key'=>'id'
     ],
 
+    'open_queue'=>false,//是否开启队列记录日志
+    'queue_name'=>'behavior_log',//日志队列名称
 ];

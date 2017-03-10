@@ -1,8 +1,8 @@
 <?php
 namespace CrCms\Log\Services;
 
+use CrCms\Log\Jobs\BehaviorLogJob;
 use CrCms\Log\Models\Behavior;
-use CrCms\Log\Repositories\BehaviorRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
@@ -13,7 +13,6 @@ use Jenssegers\Agent\Agent;
  */
 class BehaviorLogService
 {
-
     /**
      * @var Request|null
      */
@@ -25,10 +24,8 @@ class BehaviorLogService
     protected $agent = null;
 
     /**
-     * @var BehaviorRepository|null
+     * @var Behavior|null
      */
-//    protected $repository = null;
-
     protected $model = null;
 
     /**
@@ -127,7 +124,13 @@ class BehaviorLogService
             ->setTypeData()
             ->setStatusData();
 
-        return $this->model->create($this->data);
+        if (config('log.open_queue')) {
+            return dispatch(
+                (new BehaviorLogJob($this->data))->onQueue(config('log.queue_name'))
+            );
+        } else {
+            return $this->model->create($this->data);
+        }
     }
 
 

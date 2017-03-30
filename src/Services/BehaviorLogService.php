@@ -139,7 +139,7 @@ class BehaviorLogService
      */
     protected function setRemarkData() : self
     {
-        $this->data['remark'] = $this->logRemark;
+        $this->data['remark'] = (string)$this->logRemark;
         return $this;
     }
 
@@ -204,8 +204,8 @@ class BehaviorLogService
     {
         $ip = $this->request->ip()==='::1' ? '127.0.0.1' : $this->request->ip();
         $this->data['client_ip'] = sprintf("%u",ip2long($ip));
-        $this->data['url'] = $this->request->fullUrl();
-        $this->data['method'] = $this->request->method();
+        $this->data['url'] = (string)$this->request->fullUrl();
+        $this->data['method'] = (string)$this->request->method();
         return $this;
     }
 
@@ -215,7 +215,7 @@ class BehaviorLogService
      */
     protected function setAgentData() : self
     {
-        $this->data['agent'] = $this->agent->getUserAgent();
+        $this->data['agent'] = (string)$this->agent->getUserAgent();
         return $this;
     }
 

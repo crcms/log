@@ -5,6 +5,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Behavior extends Model
 {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
     /**
      * 不允许写入的字段，默认解除禁止
      * @var array

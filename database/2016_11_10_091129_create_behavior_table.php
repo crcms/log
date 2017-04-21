@@ -26,7 +26,7 @@ class CreateBehaviorTable extends Migration
             $table->string('user_type',50)->default('');
             $table->string('type',50)->default('');
             $table->unsignedInteger('type_id')->default(0);
-            $table->timestamp('log_time')->nullable();
+            //$table->timestamp('log_time')->nullable();
             $table->timestamps();
         });
     }

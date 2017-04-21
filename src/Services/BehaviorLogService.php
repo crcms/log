@@ -140,7 +140,7 @@ class BehaviorLogService
      */
     protected function setLogTime() : self
     {
-        $this->data['log_time'] = time();
+        $this->data['created_at'] = date('Y-m-d H:i:s');
         return $this;
     }
 

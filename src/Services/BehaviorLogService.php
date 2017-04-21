@@ -122,6 +122,7 @@ class BehaviorLogService
             ->setUserData()
             ->setRemarkData()
             ->setTypeData()
+            ->setLogTime()
             ->setStatusData();
 
         if (config('log.open_queue')) {
@@ -131,6 +132,16 @@ class BehaviorLogService
         } else {
             return $this->model->create($this->data);
         }
+    }
+
+
+    /**
+     * @return BehaviorLogService
+     */
+    protected function setLogTime() : self
+    {
+        $this->data['log_time'] = time();
+        return $this;
     }
 
 

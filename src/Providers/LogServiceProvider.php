@@ -29,7 +29,7 @@ class LogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom($this->migrationPath);
+        //$this->loadMigrationsFrom($this->migrationPath);
 
         $this->publishes([
             $this->configPath => config_path('log.php'),
